@@ -15,7 +15,9 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', function () {
-    return view('posts',['judul'=>'Blog', 'posts'=>Post::all()]);
+
+    return view('posts',['judul'=>'Blog', 'posts'=>Post::filter(request
+    (['search','category','author']))->latest()->paginate(5)->withQueryString()]);
 
 });
 
